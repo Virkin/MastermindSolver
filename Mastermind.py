@@ -51,7 +51,8 @@ class Mastermind :
                     lResults.append( 1 )
                 else :
                     lResults.append( 0 )
-
+        
+        random.shuffle( lResults )
         return lResults
     
     def IsSolved( self ) :
