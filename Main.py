@@ -1,7 +1,8 @@
 from Mastermind import Mastermind
+from Solver import Solver
 
-gNumberOfColors = 5
-gCodeLength = 3
+gNumberOfColors = 8
+gCodeLength = 5
 gNumberOfTry = 12
 
 def CheckInput( pInput ) :
@@ -21,11 +22,22 @@ if __name__ == "__main__":
     lMastermind = Mastermind( gNumberOfColors, gCodeLength, gNumberOfTry )
     lMastermind.InitializeGame()
 
+    lSolver = Solver( gNumberOfColors, gCodeLength )
+    lSolver.InitializeSolver()
+
+    lResult = None
+
     while not ( lMastermind.IsSolved() or lMastermind.IsAllTryUsed() ) :
-        lCorrectInputGiven = False
+        #lCorrectInputGiven = False
 
-        while not lCorrectInputGiven :
-            lInputCode = input()
-            lCorrectInputGiven = CheckInput( lInputCode )
-
-        print( lMastermind.CheckCode( list( map( int, list( lInputCode ) ) ) ) )
+        #while not lCorrectInputGiven :
+            #lInputCode = input()
+            #lCorrectInputGiven = CheckInput( lInputCode )
+      
+        lGivenCode = lSolver.GuessCode( lResult )
+        lResult = lMastermind.CheckCode( list( map( int, lGivenCode ) ) ) 
+  
+        print( lGivenCode )
+        print( lResult )
+        
+        #print( lMastermind.CheckCode( list( map( int, list( lInputCode ) ) ) ) )
